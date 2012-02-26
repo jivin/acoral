@@ -1,0 +1,42 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'Test configuration'
+bool "Turn on test Demo" CFG_TEST
+if [ "$CFG_TEST" = "y" ]; then
+	bool "Support Task test Demo" CFG_TEST_TASK
+	if [ "$CFG_TEST_TASK" = "y" ]; then
+		int "test-task Number(0-N)" CFG_TEST_TASK_NUM 4
+	fi
+	bool "Support Delay test Demo" CFG_TEST_DELAY
+	bool "Support Mutex test Demo" CFG_TEST_MUTEX
+	bool "Support Mail box test Demo" CFG_TEST_MBOX
+	bool "Support Semphore test Demo" CFG_TEST_SEM
+	bool "Support RM test Demo" CFG_TEST_RM
+	bool "Support posix test Demo" CFG_TEST_POSIX
+	bool "Support Statistic test Demo" CFG_TEST_STAT
+	bool "Support Interrupt delay test Demo" CFG_TEST_INTR
+	bool "Support Spinlock test Demo" CFG_TEST_SPINLOCK
+	bool "Support Atomic test Demo" CFG_TEST_ATOMIC
+	bool "Support Task switch timer test Demo" CFG_TEST_TASKSW
+	bool "Support random test Demo" CFG_TEST_RAND
+	bool "Support sched lock test Demo" CFG_TEST_LOCK
+	bool "Support Mem scan test Demo" CFG_TEST_MEM
+	bool "Support the level2 mem scan test Demo" CFG_TEST_MEM2
+	bool "Support exception test Demo" CFG_TEST_EXP
+	bool "Support period thread test Demo" CFG_TEST_PERIOD
+	bool "Support slice thread test Demo" CFG_TEST_SLICE
+	bool "Support Move thread test Demo" CFG_TEST_MOVE
+	bool "Support message test1 Demo" CFG_TEST_MSG1
+	bool "Support message test2 Demo" CFG_TEST_MSG2
+	bool "Support message test3 Demo" CFG_TEST_MSG3
+	bool "Support File System Test Demo" CFG_TEST_FILE
+	bool "Support Screen Demo" CFG_TEST_SCREEN
+	bool "Support Touch screen Demo" CFG_TEST_TS
+	bool "Support Task switch Demo" CFG_TEST_TASKSWITCH
+	bool "Support Interrupt Latency Demo" CFG_TEST_INTR_TIME
+	bool "Support Semaphore Shuffling Demo" CFG_TEST_SEMAPHORE_SHUFFLING
+fi
+endmenu

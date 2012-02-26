@@ -1,0 +1,20 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'User configuration'
+bool "Turn on shell Application" CFG_SHELL
+if [ "$CFG_SHELL" = y ];then
+	bool "Turn on uart shell Application" CFG_UART_SHELL
+	if [ "$CFG_PLUGIN_NET" = y ];then
+		bool "Turn on telnet Application" CFG_TELNET_SHELL
+	fi
+	if [ "$CFG_PLUGIN_FS" = y ];then
+		bool "Turn on FS SHELL Command " CFG_SHELL_FS_CMD
+	fi
+fi
+if [ "$CFG_PLUGIN_NET" = y ];then
+	bool "Turn on web server" CFG_WEB_SERVER
+fi
+endmenu

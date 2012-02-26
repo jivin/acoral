@@ -1,0 +1,8 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'lib configuration'
+bool "Support extension libarary" CFG_LIB_EXT
+endmenu

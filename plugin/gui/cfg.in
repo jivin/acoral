@@ -1,0 +1,7 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+if [ "$CFG_PLUGIN_GUI" = "y" ];then
+	bool "Show mouse icon" CFG_SHOW_MOUSE
+fi

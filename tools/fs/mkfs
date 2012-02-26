@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ $# -lt 1 ];then
+	echo "please input output directory" 
+	exit
+fi
+OUT_DISK=$1/acoral.disk
+dd if=/dev/zero of=$OUT_DISK bs=1M count=128
+losetup -d /dev/loop4
+losetup /dev/loop4 $OUT_DISK
+dd if=acoral.img of=/dev/loop4
+losetup -d /dev/loop4

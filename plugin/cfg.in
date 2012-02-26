@@ -1,0 +1,11 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'Plugin configuration'
+bool "Support Gui plugin" CFG_PLUGIN_GUI
+source plugin/gui/cfg.in
+bool "Support Lwip plugin" CFG_PLUGIN_NET
+bool "Support file System plugin" CFG_PLUGIN_FS
+endmenu

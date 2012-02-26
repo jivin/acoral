@@ -1,0 +1,35 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'hal Configuration'
+  choice 'Platform' \
+    "s3c2440	CFG_ARM_S3C2440 \
+     s3c2410	CFG_ARM_S3C2410\
+     s3c44b0	CFG_ARM_S3C44B0\
+     lpc2131	CFG_ARM_LPC2131\
+     lpc2200	CFG_ARM_LPC2200\
+     PB11_mpcore  CFG_ARM_PB11MPCORE\
+     stm3210f3	CFG_ARM_STM3210      \
+     emulation_single_core 	CFG_X86_EMU_SINGLE\
+     emulation_cmp 	CFG_X86_EMU_CMP\
+     template 	CFG_BRD_TEMPLATE"
+
+   if [ "$CFG_ARM_PB11MPCORE" = "y" ];then
+	bool "Support CMP" CFG_CMP
+	if [ "$CFG_CMP" = "y" ];then
+		int 'Core Number (0-4)' CFG_MAX_CPU 4
+	fi
+   fi
+   if [ "$CFG_X86_EMU_SINGLE" = "y" ]; then
+	define_bool CFG_GUI_EMU y
+   fi
+   if [ "$CFG_X86_EMU_CMP" = "y" ]; then
+	define_bool CFG_GUI_EMU y
+	bool "Support CMP" CFG_CMP
+	if [ "$CFG_CMP" = "y" ]; then
+		int 'Core Number (0-N)' CFG_MAX_CPU 2
+	fi
+   fi
+endmenu

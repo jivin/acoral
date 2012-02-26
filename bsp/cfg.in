@@ -1,0 +1,10 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'Bsp configuration'
+	if [ "$CFG_ARM_STM3210" = "y" ]; then
+		bool "Support BSP" CFG_BSP
+	fi
+endmenu

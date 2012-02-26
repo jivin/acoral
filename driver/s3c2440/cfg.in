@@ -1,0 +1,28 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+if [ "$CFG_DRIVER" = "y" ];then
+bool "Support console driver" CFG_DRV_CONSOLE
+	if [ "$CFG_DRV_CONSOLE" = "y" ];then
+		bool "Support uart console" CFG_DRV_CON_UART
+		bool "Support telnet console" CFG_DRV_CON_TELNET
+	fi
+	
+bool "Support lcd driver" CFG_DRV_LCD
+	if [ "$CFG_DRV_LCD" = "y" ];then
+		choice 'Choose a detail board' \
+		"mini2440	CFG_DRV_LCD_MINI2440 \
+		tq2440	CFG_DRV_LCD_TQ2440"
+	fi
+
+bool "Support touch screen driver" CFG_DRV_TS
+	if [ "$CFG_DRV_TS" = "y" ];then
+		choice 'Choose a detail board' \
+		"mini2440	CFG_DRV_TS_MINI2440 \
+		tq2440	CFG_DRV_TS_TQ2440"
+	fi
+
+bool "Support net device dm9000" CFG_DRV_NET_DM9000
+bool "Support sdi driver" CFG_DRV_SDI
+fi

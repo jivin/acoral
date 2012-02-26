@@ -1,0 +1,52 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'kernel configuration'
+
+comment 'Memery Management'
+choice 'Level1 Memory management' \
+  "Buddy_Mem_System  CFG_MEM_BUDDY\
+  SLATE_Mem_System  CFG_MEM_SLATE"
+  bool 'Support  The  Level2 Memory Managment' CFG_MEM2
+  if [ "$CFG_MEM2" = "y" ]; then
+	int "Level2 Memory size" CFG_MEM2_SIZE 256 
+  fi
+comment 'Thread Management'
+   bool 'Support Slice Thread' CFG_THRD_SLICE
+   bool 'Support Period Thread' CFG_THRD_PERIOD
+   if [ "$CFG_THRD_PERIOD" = "y" ]; then
+	bool 'Support RM Thread' CFG_THRD_RM
+	if [ "$CFG_THRD_RM" = "y" ]; then
+		int 'RM Thread prio Num(0~250)' CFG_HARD_RT_PRIO_NUM 0
+	fi
+	if [ "$CFG_THRD_SLICE" = "y" ]; then
+		bool 'Support Posix Thread' CFG_THRD_POSIX
+		if [ "$CFG_THRD_POSIX" = "y" ]; then
+			int "Posix Stair Num" CFG_POSIX_STAIR_NUM 30
+		fi
+	fi
+   fi
+
+int "Max Thread Number(5~)" CFG_MAX_THREAD 40
+int "Mini Thread Stack(Byte)" CFG_MIN_STACK_SIZE 512
+
+comment 'Power Mangement'
+bool 'Support power management' CFG_PM
+
+comment 'Event Mangement'
+      bool 'Support MailBox Event' CFG_EVT_MBOX
+      bool 'Support Semaphore Event' CFG_EVT_SEM
+      bool 'Support Message'     CFG_MSG
+
+comment 'Timer Mangement'
+      bool 'Support Software delay' CFG_SOFT_DELAY
+int "ticks number per second(0-N)" CFG_TICKS_PER_SEC 100
+
+comment 'Hook Mangement'
+bool 'Support hook' CFG_HOOK
+if [ "$CFG_HOOK" = "y" ]; then
+      bool 'Support ticks handle hook' CFG_HOOK_TICKS
+fi
+endmenu

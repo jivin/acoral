@@ -1,0 +1,28 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_name "Acoral kernel configuration"
+
+source hal/cfg.in
+source kernel/cfg.in
+source driver/cfg.in
+source bsp/cfg.in
+source plugin/cfg.in
+source lib/cfg.in
+source test/cfg.in
+source user/cfg.in
+
+mainmenu_option next_comment
+comment 'System hacking'
+int '  Console baud rate' CFG_BAUD_RATE 38400
+bool ' support semihosting' CFG_OUT_SEMI
+bool ' Debugging' CFG_DEBUG
+if [ "$CFG_DEBUG" = "y" ]; then
+  int '  Debugging level (0 = quiet, 3 = noisy)' CFG_DEBUG_LEVEL 0
+fi
+bool ' Support Statistic' CFG_STAT
+define_bool __GNU_C__ y
+endmenu
+
+

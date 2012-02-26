@@ -1,0 +1,7 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+if [ "$CFG_DRIVER" = "y" ];then
+bool "Support console driver" CFG_DRV_CONSOLE
+fi

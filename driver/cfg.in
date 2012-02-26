@@ -1,0 +1,39 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+mainmenu_option next_comment
+comment 'Driver configuration'
+bool "Support Driver System" CFG_DRIVER
+
+if [ "$CFG_ARM_PB11MPCORE" = "y" ];then
+	source driver/pb11mpcore/cfg.in
+fi
+if [ "$CFG_ARM_S3C2440" = "y" ];then
+	source driver/s3c2440/cfg.in
+fi
+if [ "$CFG_ARM_S3C2410" = "y" ];then
+	source driver/s3c2410/cfg.in
+fi
+if [ "$CFG_ARM_STM3210" = "y" ];then
+	source driver/stm3210/cfg.in
+fi
+if [ "$CFG_ARM_S3C44B0" = "y" ];then
+	source driver/s3c44b0/cfg.in
+fi
+if [ "$CFG_ARM_LPC2200" = "y" ];then
+	source driver/lpc2200/cfg.in
+fi
+if [ "$CFG_ARM_LPC2131" = "y" ];then
+	source driver/lpc2131/cfg.in
+fi
+if [ "$CFG_X86_EMU_SINGLE" = "y" ];then
+	source driver/emu_single/cfg.in
+fi
+if [ "$CFG_X86_EMU_CMP" = "y" ];then
+	source driver/emu_cmp/cfg.in
+fi
+if [ "$CFG_BRD_TEMPLATE" = "y" ];then
+	source driver/template/cfg.in
+fi
+endmenu

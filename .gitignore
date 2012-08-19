@@ -1,0 +1,6 @@
+*.o
+*.flags
+acoral.*
+include/autocfg.h
+hal.api
+.config

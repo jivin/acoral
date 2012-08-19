@@ -1,0 +1,33 @@
+#!/bin/bash
+function choose_config()
+{
+	echo "... pick a config:"
+	CONFIG_LIST=`ls $1|grep "_cfg"`
+    local i=1
+    local choice
+    for choice in ${CONFIG_LIST}
+    do
+        echo "     $i. $choice"
+        i=$(($i+1))
+    done
+
+	echo -n "which would you to choose?"
+    read answer
+	if [ -z "$answer" ]
+    then
+        selection=`echo $CONFIG_LIST|awk '{print $1}'`
+    elif (echo -n $answer | grep -q -e "^[0-9][0-9]*$")
+    then
+        selection=`echo $CONFIG_LIST|awk '{print $'$answer'}'`
+	else
+		selection=
+    fi
+	CHECK=`echo $selection|grep "_cfg"`
+	if [ -z "$CHECK" ];then
+		selection=
+	fi
+	export CONFIG_FILE=$selection
+	make $CONFIG_FILE
+	echo "Please execute make to build acoral"
+}
+choose_config $1

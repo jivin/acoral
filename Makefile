@@ -28,10 +28,10 @@ include .config
 -include ./hal/$(BOARD)/cfg.mk
 include ./plugin/cfg.mk
 include ./bsp/cfg.mk
-else
-do-it-all:	menuconfig
-endif
 do-it-all: 	acoral	
+else
+do-it-all:	choose
+endif
 
 #
 # Include the make variables (CC, etc...)
@@ -80,7 +80,9 @@ subdir-y=hal kernel lib plugin user
 subdir-$(CFG_DRIVER)+=driver
 subdir-$(CFG_BSP)+=bsp
 subdir-$(CFG_TEST)+=test
-
+choose:
+	tools/scripts/buildTool tools/configs/
+	
 acoral:include/autocfg.h first_rule $(CORE_FILES)
 	@echo "###System Configure###"
 	@echo   ARCH=$(ARCH)
@@ -107,8 +109,9 @@ menuconfig:
 	$(MAKE) -C tools/scripts/lxdialog all
 	$(CONFIG_SHELL) tools/scripts/Menuconfig cfg.in
 
-%.cfg: tools/configs/%.cfg
-	@cp $< .config
+%_cfg: tools/configs/%_cfg
+	@echo "Select Config $@"
+	@cp $< .config 
 	@tools/scripts/AutoConfigure $<
 
 fs:
